@@ -1,5 +1,19 @@
 # RsvpApp
 
+This project is an RSVP Event Management to manage your attendes for any event. The image below shows the preview of that app and how it works.
+
+![Preview](image.png)
+
+To setup and run it in your machine, follow the below steps:
+
+## Install dependencies
+
+First, install all the dependencies from package.json using this command:
+
+```
+npm install
+```
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
 ## Development server
