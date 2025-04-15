@@ -1,0 +1,34 @@
+<div class="home-container">
+  <header class="header">
+    <h1>Event RSVP Management</h1>
+    <p class="subtitle">Manage attendance for your upcoming event</p>
+  </header>
+
+  <div class="content-grid">
+    <div class="form-section">
+      <h2>Add or Update RSVP</h2>
+      <app-rsvp-form (rsvpSubmitted)="handleRsvpSubmitted($event)">
+      </app-rsvp-form>
+    </div>
+
+    <div class="stats-section">
+      <h2>RSVP Statistics</h2>
+      <app-rsvp-stats [counts]="rsvpCounts"></app-rsvp-stats>
+    </div>
+
+    <div class="attendees-section">
+      <h2>Confirmed Attendees</h2>
+      <app-confirmed-attendees [attendees]="confirmedAttendees">
+      </app-confirmed-attendees>
+    </div>
+
+    <div class="list-section">
+      <h2>All RSVPs</h2>
+      <app-rsvp-list
+        [entries]="rsvpEntries"
+        (updateRsvp)="handleRsvpSubmitted($event)"
+      >
+      </app-rsvp-list>
+    </div>
+  </div>
+</div>

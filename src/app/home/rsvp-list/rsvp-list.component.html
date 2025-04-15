@@ -1,0 +1,47 @@
+<div class="rsvp-list-container">
+  <p *ngIf="entries.length === 0" class="no-entries">No RSVPs submitted yet</p>
+
+  <div class="rsvp-table" *ngIf="entries.length > 0">
+    <div class="table-header">
+      <div class="header-cell">Name</div>
+      <div class="header-cell">Email</div>
+      <div class="header-cell">Status</div>
+      <div class="header-cell">Response Date</div>
+      <div class="header-cell">Actions</div>
+    </div>
+
+    <div class="table-row" *ngFor="let entry of entries">
+      <div class="table-cell">{{ entry.player.name }}</div>
+      <div class="table-cell">{{ entry.player.email || "N/A" }}</div>
+      <div class="table-cell">
+        <span class="status-badge" [ngClass]="getStatusClass(entry.status)">
+          {{ entry.status }}
+        </span>
+      </div>
+      <div class="table-cell">{{ formatDate(entry.responseDate) }}</div>
+      <div class="table-cell actions">
+        <button
+          [disabled]="entry.status === 'Yes'"
+          [ngClass]="{ 'active-status': entry.status === 'Yes' }"
+          (click)="changeStatus(entry, 'Yes')"
+        >
+          Yes
+        </button>
+        <button
+          [disabled]="entry.status === 'No'"
+          [ngClass]="{ 'active-status': entry.status === 'No' }"
+          (click)="changeStatus(entry, 'No')"
+        >
+          No
+        </button>
+        <button
+          [disabled]="entry.status === 'Maybe'"
+          [ngClass]="{ 'active-status': entry.status === 'Maybe' }"
+          (click)="changeStatus(entry, 'Maybe')"
+        >
+          Maybe
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

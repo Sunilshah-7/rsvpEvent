@@ -1,0 +1,53 @@
+<form [formGroup]="rsvpForm" (ngSubmit)="onSubmit()" class="rsvp-form">
+  <div class="form-group">
+    <label for="playerId">Player ID</label>
+    <input 
+      type="text" 
+      id="playerId" 
+      formControlName="playerId" 
+      placeholder="Enter unique ID"
+      class="form-control"
+      required>
+    <div class="error-message" *ngIf="rsvpForm.get('playerId')?.invalid && rsvpForm.get('playerId')?.touched">
+      Player ID is required
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="playerName">Name</label>
+    <input 
+      type="text" 
+      id="playerName" 
+      formControlName="playerName" 
+      placeholder="Enter player name"
+      class="form-control"
+      required>
+    <div class="error-message" *ngIf="rsvpForm.get('playerName')?.invalid && rsvpForm.get('playerName')?.touched">
+      Name is required
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="playerEmail">Email</label>
+    <input 
+      type="email" 
+      id="playerEmail" 
+      formControlName="playerEmail" 
+      placeholder="Enter email (optional)"
+      class="form-control">
+    <div class="error-message" *ngIf="rsvpForm.get('playerEmail')?.invalid && rsvpForm.get('playerEmail')?.touched">
+      Please enter a valid email
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="status">RSVP Status</label>
+    <select id="status" formControlName="status" class="form-control">
+      <option *ngFor="let status of rsvpStatuses" [value]="status">{{ status }}</option>
+    </select>
+  </div>
+  
+  <button type="submit" [disabled]="rsvpForm.invalid" class="submit-button">
+    Submit RSVP
+  </button>
+</form>

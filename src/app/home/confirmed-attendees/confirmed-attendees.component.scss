@@ -1,0 +1,46 @@
+.attendees-container {
+  width: 100%;
+}
+
+.no-attendees {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.attendees-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.attendee-item {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    background-color: #f8fafc;
+  }
+}
+
+.attendee-info {
+  flex: 1;
+}
+
+.attendee-name {
+  font-weight: 500;
+  color: #334155;
+  margin-bottom: 0.25rem;
+}
+
+.attendee-email {
+  font-size: 0.875rem;
+  color: #64748b;
+}

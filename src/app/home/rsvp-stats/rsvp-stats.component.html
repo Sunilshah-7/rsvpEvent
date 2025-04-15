@@ -1,0 +1,33 @@
+<div class="stats-container">
+  <div class="stat-card total">
+    <div class="stat-value">{{ counts.total }}</div>
+    <div class="stat-label">Total Responses</div>
+  </div>
+  
+  <div class="stat-card confirmed">
+    <div class="stat-value">{{ counts.confirmed }}</div>
+    <div class="stat-percentage">{{ confirmedPercentage }}%</div>
+    <div class="stat-label">Confirmed</div>
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="confirmedPercentage"></div>
+    </div>
+  </div>
+  
+  <div class="stat-card declined">
+    <div class="stat-value">{{ counts.declined }}</div>
+    <div class="stat-percentage">{{ declinedPercentage }}%</div>
+    <div class="stat-label">Declined</div>
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="declinedPercentage"></div>
+    </div>
+  </div>
+  
+  <div class="stat-card maybe">
+    <div class="stat-value">{{ counts.maybe }}</div>
+    <div class="stat-percentage">{{ maybePercentage }}%</div>
+    <div class="stat-label">Maybe</div>
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="maybePercentage"></div>
+    </div>
+  </div>
+</div>

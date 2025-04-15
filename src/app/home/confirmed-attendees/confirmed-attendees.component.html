@@ -1,0 +1,14 @@
+<div class="attendees-container">
+  <p *ngIf="attendees.length === 0" class="no-attendees">
+    No confirmed attendees yet
+  </p>
+  
+  <ul class="attendees-list">
+    <li *ngFor="let attendee of attendees" class="attendee-item">
+      <div class="attendee-info">
+        <div class="attendee-name">{{ attendee.name }}</div>
+        <div class="attendee-email" *ngIf="attendee.email">{{ attendee.email }}</div>
+      </div>
+    </li>
+  </ul>
+</div>
