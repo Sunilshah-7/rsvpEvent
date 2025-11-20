@@ -1,6 +1,6 @@
 # RsvpApp
 
-This project is an RSVP Event Management to manage your attendes for any event. The image below shows the preview of that app and how it works. Link to ![Apple Jobs](Search Jobs - Jobs - Careers at Apple.pdf)(Search%20Jobs%20-%20Jobs%20-%20Careers%20at%20Apple.pdf)
+This project is an RSVP Event Management to manage your attendes for any event. The image below shows the preview of that app and how it works. Link to ![Apple Jobs](Search%20Jobs%20-%20Jobs%20-%20Careers%20at%20Apple.pdf)
 
 
 ![Preview](image.png)
