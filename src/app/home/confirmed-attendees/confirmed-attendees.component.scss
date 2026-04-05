@@ -1,11 +1,15 @@
 .attendees-container {
   width: 100%;
+  border: 1px solid #ede1cc;
+  border-radius: 12px;
+  background: #fffef8;
+  overflow: hidden;
 }
 
 .no-attendees {
   text-align: center;
   padding: 2rem;
-  color: #64748b;
+  color: #65737c;
   font-style: italic;
 }
 
@@ -16,17 +20,17 @@
 }
 
 .attendee-item {
-  padding: 1rem;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid #eee4d4;
   display: flex;
   align-items: center;
-  
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:hover {
-    background-color: #f8fafc;
+    background-color: #fff7ea;
   }
 }
 
@@ -35,12 +39,12 @@
 }
 
 .attendee-name {
-  font-weight: 500;
-  color: #334155;
+  font-weight: 700;
+  color: #273c49;
   margin-bottom: 0.25rem;
 }
 
 .attendee-email {
-  font-size: 0.875rem;
-  color: #64748b;
+  font-size: 0.82rem;
+  color: #62727d;
 }

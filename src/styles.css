@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+:root {
+  --bg-base: #f7f3eb;
+  --bg-ink: #132a3a;
+  --bg-panel: #fffdf8;
+  --surface-soft: #fff7e8;
+  --line-soft: #eadfcb;
+  --text-main: #1f2c35;
+  --text-muted: #5e6b74;
+  --brand-coral: #e07a5f;
+  --brand-teal: #3f7d73;
+  --brand-amber: #efb366;
+  --success: #2f8f5b;
+  --danger: #b44a3f;
+  --warning: #b97a28;
+  --shadow-soft: 0 14px 30px rgba(20, 32, 44, 0.08);
+  --shadow-strong: 0 22px 46px rgba(20, 32, 44, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--text-main);
+  font-family: Outfit, "Avenir Next", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(
+      circle at 10% 5%,
+      rgba(224, 122, 95, 0.15),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(63, 125, 115, 0.16),
+      transparent 34%
+    ),
+    linear-gradient(160deg, var(--bg-base), #f3eee4 45%, #ece8dd 100%);
+}

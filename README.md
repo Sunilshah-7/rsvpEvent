@@ -1,84 +1,167 @@
-# RsvpApp
+# RSVP Event App
 
-This project is an RSVP Event Management to manage your attendes for any event. The image below shows the preview of that app and how it works. 
+An Angular-based RSVP Event Management application to collect and manage attendee responses for an event.
 
+The app now includes a full capacity and waitlist workflow:
+
+1. Confirmed attendees are limited by a configurable capacity.
+2. Extra Yes RSVPs are automatically moved to a waitlist.
+3. If a confirmed attendee changes from Yes to No/Maybe, the first waitlisted attendee is auto-promoted.
 
 ![Preview](image.png)
 
-To setup and run it in your machine, follow the below steps:
+## What This App Does
 
-## Install dependencies
+1. Create or update RSVP responses using Player ID, name, email, and status.
+2. Show live RSVP statistics for total, confirmed, declined, maybe, and waitlisted.
+3. Manage event capacity from the UI.
+4. Display confirmed attendees separately from waitlisted attendees.
+5. View all RSVP records in a table with seat assignment status.
 
-First, install all the dependencies from package.json using this command:
+## Current RSVP Rules
 
-```
+1. RSVP statuses supported: Yes, No, Maybe.
+2. Only Yes RSVPs are eligible for confirmed seats.
+3. Confirmed seats are allocated by earliest response time.
+4. If Yes responses exceed capacity, overflow is assigned to waitlist positions.
+5. Waitlist positions are recalculated automatically whenever status or capacity changes.
+
+## Tech Stack
+
+1. Angular 20 (standalone components)
+2. TypeScript 5
+3. RxJS
+4. Karma + Jasmine for unit testing
+5. Angular SSR dependency included for server-side rendering support
+
+## Project Structure
+
+Core app layout:
+
+1. src/app/home
+2. src/app/models
+3. src/app/services
+
+Main functional pieces:
+
+1. home component: page orchestration, data refresh, capacity change handling
+2. rsvp form component: create or update RSVP input flow
+3. rsvp list component: full RSVP table and status actions
+4. rsvp stats component: dashboard metrics
+5. confirmed attendees component: confirmed attendee list
+6. rsvp service: business logic for RSVP state, capacity, waitlist, and counts
+
+## Setup
+
+### Prerequisites
+
+1. Node.js 20+
+2. npm 10+
+
+### Install dependencies
+
+```bash
 npm install
 ```
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+## Run the App
 
-## Development server
-
-To start a local development server, run:
+Start development server:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open:
 
-## Code scaffolding
+http://localhost:4200/
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Note:
+
+1. Use npm start or ng serve.
+2. npm serve is not a valid script in this project.
+
+## Available Scripts
+
+1. npm start: start dev server (ng serve)
+2. npm run build: production build
+3. npm run watch: development build in watch mode
+4. npm test: run unit tests (watch mode by default)
+5. npm run serve:ssr:rsvp-app: run built SSR server output
+
+## Build
 
 ```bash
-ng generate component component-name
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Build output:
+
+dist/rsvp-app
+
+## Test
+
+Default tests:
 
 ```bash
-ng generate --help
+npm test
 ```
 
-## Building
-
-To build the project run:
+One-time headless run:
 
 ```bash
-ng build
+npm run test -- --watch=false --browsers=ChromeHeadless
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Covered service behavior includes:
 
-## Running unit tests
+1. create and update RSVP entries
+2. counts and attendee filtering
+3. waitlist overflow when capacity is reached
+4. waitlist promotion when a confirmed attendee declines
+5. waitlist rebalancing when capacity changes
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Core Dependencies (Current)
 
-```bash
-ng test
-```
+Runtime:
 
-## Running end-to-end tests
+1. @angular/common ^20.3.18
+2. @angular/compiler ^20.3.18
+3. @angular/core ^20.3.18
+4. @angular/forms ^20.3.18
+5. @angular/platform-browser ^20.3.18
+6. @angular/platform-browser-dynamic ^20.3.18
+7. @angular/router ^20.3.18
+8. express 5.1.0
 
-For end-to-end (e2e) testing, run:
+Development:
 
-```bash
-ng e2e
-```
+1. @angular/cli ^20.3.22
+2. @angular-devkit/build-angular ^20.3.22
+3. @angular/compiler-cli ^20.3.18
+4. @angular/platform-server ^20.3.18
+5. @angular/ssr ^20.3.22
+6. karma, jasmine-core, and related launchers/reporters
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Security Note
 
-## Additional Resources
+Angular compiler vulnerability (GHSA-g93w-mfhg-p222) has been addressed by upgrading Angular packages to secure versions in the 20.3.18+ line.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Troubleshooting
 
+1. Command not found for ng:
+   - Use npm start instead of ng serve if Angular CLI is not globally installed.
+2. Port 4200 already in use:
+   - Run ng serve --port 4300.
+3. Test browser launch issues:
+   - Ensure Chrome is installed for ChromeHeadless runs.
 
-## Dependencies to install
-@angular/ssr @angular/common @angular/core
- "@angular/compiler": "^19.2.0",
-    "@angular/forms": "^19.2.0",
-    "@angular/platform-browser": "^19.2.0",
-    "@angular/platform-browser-dynamic": "^19.2.0",
-    "@angular/platform-server": "^19.2.0",
-    "@angular/router": "^19.2.0",
+## Future Enhancements
+
+Planned roadmap includes:
+
+1. RSVP edit and cancellation history
+2. Email confirmations and reminders
+3. Duplicate detection and anti-spam controls
+4. Admin dashboard with filters and export
+5. Event-day check-in mode

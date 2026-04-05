@@ -6,6 +6,7 @@
       <div class="header-cell">Name</div>
       <div class="header-cell">Email</div>
       <div class="header-cell">Status</div>
+      <div class="header-cell">Seat</div>
       <div class="header-cell">Response Date</div>
       <div class="header-cell">Actions</div>
     </div>
@@ -16,6 +17,14 @@
       <div class="table-cell">
         <span class="status-badge" [ngClass]="getStatusClass(entry.status)">
           {{ entry.status }}
+        </span>
+      </div>
+      <div class="table-cell">
+        <span
+          class="seat-badge"
+          [ngClass]="{ 'waitlisted-seat': entry.isWaitlisted }"
+        >
+          {{ getSeatLabel(entry) }}
         </span>
       </div>
       <div class="table-cell">{{ formatDate(entry.responseDate) }}</div>

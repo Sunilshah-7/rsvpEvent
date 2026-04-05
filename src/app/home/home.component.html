@@ -2,7 +2,32 @@
   <header class="header">
     <h1>Event RSVP Management</h1>
     <p class="subtitle">Manage attendance for your upcoming event</p>
+    <div class="header-badges">
+      <span class="badge">Capacity {{ rsvpCounts.capacity }}</span>
+      <span class="badge">Confirmed {{ rsvpCounts.confirmed }}</span>
+      <span class="badge">Waitlist {{ rsvpCounts.waitlisted }}</span>
+    </div>
   </header>
+
+  <section class="capacity-section">
+    <div class="capacity-header">
+      <h2>Capacity + Waitlist</h2>
+      <label for="capacityInput">Max Seats</label>
+      <input
+        #capacityInput
+        id="capacityInput"
+        type="number"
+        min="1"
+        [value]="rsvpCounts.capacity"
+        (change)="handleCapacityChanged(capacityInput.value)"
+      />
+    </div>
+    <p class="capacity-summary">
+      {{ rsvpCounts.confirmed }} of {{ rsvpCounts.capacity }} seats filled,
+      {{ rsvpCounts.availableSpots }} available, {{ rsvpCounts.waitlisted }} on
+      waitlist.
+    </p>
+  </section>
 
   <div class="content-grid">
     <div class="form-section">
@@ -20,6 +45,20 @@
       <h2>Confirmed Attendees</h2>
       <app-confirmed-attendees [attendees]="confirmedAttendees">
       </app-confirmed-attendees>
+    </div>
+
+    <div class="waitlist-section">
+      <h2>Waitlist</h2>
+      <p *ngIf="waitlistedEntries.length === 0" class="empty-waitlist">
+        Nobody is currently on the waitlist.
+      </p>
+      <ul *ngIf="waitlistedEntries.length > 0" class="waitlist-list">
+        <li *ngFor="let entry of waitlistedEntries" class="waitlist-item">
+          <span class="position">#{{ entry.waitlistPosition }}</span>
+          <span class="name">{{ entry.player.name }}</span>
+          <span class="email">{{ entry.player.email || "N/A" }}</span>
+        </li>
+      </ul>
     </div>
 
     <div class="list-section">

@@ -29,18 +29,29 @@ import { ConfirmedAttendeesComponent } from './confirmed-attendees/confirmed-att
 })
 export class HomeComponent implements OnInit {
   rsvpEntries: RsvpEntry[] = [];
+  waitlistedEntries: RsvpEntry[] = [];
   confirmedAttendees: Player[] = [];
-  rsvpCounts: RsvpCounts = { total: 0, confirmed: 0, declined: 0, maybe: 0 };
+  rsvpCounts: RsvpCounts = {
+    total: 0,
+    confirmed: 0,
+    declined: 0,
+    maybe: 0,
+    waitlisted: 0,
+    capacity: 0,
+    availableSpots: 0,
+  };
 
   constructor(private rsvpService: RsvpService) {}
 
   ngOnInit(): void {
+    this.rsvpService.setCapacity(2);
     this.loadRsvpData();
     this.initializeWithSampleData();
   }
 
   loadRsvpData(): void {
     this.rsvpEntries = this.rsvpService.getAllRsvps();
+    this.waitlistedEntries = this.rsvpService.getWaitlistedEntries();
     this.confirmedAttendees = this.rsvpService.getConfirmedAttendees();
     this.rsvpCounts = this.rsvpService.getRsvpCounts();
   }
@@ -50,17 +61,30 @@ export class HomeComponent implements OnInit {
     this.loadRsvpData();
   }
 
+  handleCapacityChanged(rawCapacity: string): void {
+    const parsedCapacity = Number.parseInt(rawCapacity, 10);
+
+    if (!Number.isInteger(parsedCapacity) || parsedCapacity < 1) {
+      return;
+    }
+
+    this.rsvpService.setCapacity(parsedCapacity);
+    this.loadRsvpData();
+  }
+
   private initializeWithSampleData(): void {
     if (this.rsvpEntries.length === 0) {
       const samplePlayers: Player[] = [
         { id: '1', name: 'John Doe', email: 'john@example.com' },
         { id: '2', name: 'Jane Smith', email: 'jane@example.com' },
         { id: '3', name: 'Bob Johnson', email: 'bob@example.com' },
+        { id: '4', name: 'Alice Davis', email: 'alice@example.com' },
       ];
 
       this.rsvpService.addOrUpdateRsvp(samplePlayers[0], 'Yes');
-      this.rsvpService.addOrUpdateRsvp(samplePlayers[1], 'No');
+      this.rsvpService.addOrUpdateRsvp(samplePlayers[1], 'Yes');
       this.rsvpService.addOrUpdateRsvp(samplePlayers[2], 'Maybe');
+      this.rsvpService.addOrUpdateRsvp(samplePlayers[3], 'Yes');
 
       this.loadRsvpData();
     }

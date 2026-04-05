@@ -15,7 +15,16 @@ export class RsvpStatsComponent {
     confirmed: 0,
     declined: 0,
     maybe: 0,
+    waitlisted: 0,
+    capacity: 0,
+    availableSpots: 0,
   };
+
+  get capacityFillPercentage(): number {
+    return this.counts.capacity
+      ? Math.round((this.counts.confirmed / this.counts.capacity) * 100)
+      : 0;
+  }
 
   get confirmedPercentage(): number {
     return this.counts.total

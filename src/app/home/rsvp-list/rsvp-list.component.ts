@@ -22,6 +22,18 @@ export class RsvpListComponent {
     Maybe: 'status-maybe',
   };
 
+  getSeatLabel(entry: RsvpEntry): string {
+    if (entry.status !== 'Yes') {
+      return 'N/A';
+    }
+
+    if (entry.isWaitlisted) {
+      return `Waitlist #${entry.waitlistPosition}`;
+    }
+
+    return 'Confirmed';
+  }
+
   getStatusClass(status: RsvpStatus): string {
     return this.statusClasses[status] || '';
   }

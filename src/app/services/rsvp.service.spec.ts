@@ -68,5 +68,63 @@ describe('RsvpService', () => {
     expect(counts.confirmed).toBe(1);
     expect(counts.declined).toBe(1);
     expect(counts.maybe).toBe(1);
+    expect(counts.waitlisted).toBe(0);
+  });
+
+  it('should move extra yes RSVPs to waitlist when capacity is reached', () => {
+    service.setCapacity(2);
+
+    service.addOrUpdateRsvp(mockPlayers[0], 'Yes');
+    service.addOrUpdateRsvp(mockPlayers[1], 'Yes');
+    service.addOrUpdateRsvp(mockPlayers[2], 'Yes');
+
+    const counts = service.getRsvpCounts();
+    const waitlistedEntries = service.getWaitlistedEntries();
+    const confirmed = service.getConfirmedAttendees();
+
+    expect(counts.confirmed).toBe(2);
+    expect(counts.waitlisted).toBe(1);
+    expect(waitlistedEntries.length).toBe(1);
+    expect(waitlistedEntries[0].player.id).toBe(mockPlayers[2].id);
+    expect(waitlistedEntries[0].waitlistPosition).toBe(1);
+    expect(confirmed.map((player) => player.id)).toEqual([
+      mockPlayers[0].id,
+      mockPlayers[1].id,
+    ]);
+  });
+
+  it('should promote first waitlisted attendee when a confirmed attendee declines', () => {
+    service.setCapacity(2);
+
+    service.addOrUpdateRsvp(mockPlayers[0], 'Yes');
+    service.addOrUpdateRsvp(mockPlayers[1], 'Yes');
+    service.addOrUpdateRsvp(mockPlayers[2], 'Yes');
+
+    service.addOrUpdateRsvp(mockPlayers[0], 'No');
+
+    const waitlistedEntries = service.getWaitlistedEntries();
+    const confirmed = service.getConfirmedAttendees();
+
+    expect(waitlistedEntries.length).toBe(0);
+    expect(confirmed.map((player) => player.id).sort()).toEqual([
+      mockPlayers[1].id,
+      mockPlayers[2].id,
+    ]);
+  });
+
+  it('should re-balance waitlist after increasing capacity', () => {
+    service.setCapacity(1);
+
+    service.addOrUpdateRsvp(mockPlayers[0], 'Yes');
+    service.addOrUpdateRsvp(mockPlayers[1], 'Yes');
+
+    service.setCapacity(2);
+
+    const counts = service.getRsvpCounts();
+    const waitlistedEntries = service.getWaitlistedEntries();
+
+    expect(counts.confirmed).toBe(2);
+    expect(counts.waitlisted).toBe(0);
+    expect(waitlistedEntries.length).toBe(0);
   });
 });
