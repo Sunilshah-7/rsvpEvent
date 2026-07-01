@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { HomeComponent } from './home/home.component';
 
 @Component({
@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
       <app-home></app-home>
     </main>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       main {

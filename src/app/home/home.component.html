@@ -20,7 +20,7 @@
         min="1"
         [value]="rsvpCounts.capacity"
         (change)="handleCapacityChanged(capacityInput.value)"
-      />
+        />
     </div>
     <p class="capacity-summary">
       {{ rsvpCounts.confirmed }} of {{ rsvpCounts.capacity }} seats filled,
@@ -49,16 +49,22 @@
 
     <div class="waitlist-section">
       <h2>Waitlist</h2>
-      <p *ngIf="waitlistedEntries.length === 0" class="empty-waitlist">
-        Nobody is currently on the waitlist.
-      </p>
-      <ul *ngIf="waitlistedEntries.length > 0" class="waitlist-list">
-        <li *ngFor="let entry of waitlistedEntries" class="waitlist-item">
-          <span class="position">#{{ entry.waitlistPosition }}</span>
-          <span class="name">{{ entry.player.name }}</span>
-          <span class="email">{{ entry.player.email || "N/A" }}</span>
-        </li>
-      </ul>
+      @if (waitlistedEntries.length === 0) {
+        <p class="empty-waitlist">
+          Nobody is currently on the waitlist.
+        </p>
+      }
+      @if (waitlistedEntries.length > 0) {
+        <ul class="waitlist-list">
+          @for (entry of waitlistedEntries; track entry) {
+            <li class="waitlist-item">
+              <span class="position">#{{ entry.waitlistPosition }}</span>
+              <span class="name">{{ entry.player.name }}</span>
+              <span class="email">{{ entry.player.email || "N/A" }}</span>
+            </li>
+          }
+        </ul>
+      }
     </div>
 
     <div class="list-section">
@@ -66,7 +72,7 @@
       <app-rsvp-list
         [entries]="rsvpEntries"
         (updateRsvp)="handleRsvpSubmitted($event)"
-      >
+        >
       </app-rsvp-list>
     </div>
   </div>

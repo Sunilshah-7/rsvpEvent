@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Player, RsvpEntry, RsvpStatus } from '../../models/rsvp.models';
 
@@ -7,6 +7,7 @@ import { Player, RsvpEntry, RsvpStatus } from '../../models/rsvp.models';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './rsvp-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./rsvp-list.component.scss'],
 })
 export class RsvpListComponent {

@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Player, RsvpStatus } from '../../models/rsvp.models';
 
 @Component({
   selector: 'app-rsvp-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './rsvp-form.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./rsvp-form.component.scss']
 })
 export class RsvpFormComponent {

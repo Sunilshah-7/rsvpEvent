@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { RsvpService } from '../services/rsvp.service';
 import {
@@ -17,14 +17,14 @@ import { ConfirmedAttendeesComponent } from './confirmed-attendees/confirmed-att
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     RsvpFormComponent,
     RsvpListComponent,
     RsvpStatsComponent,
-    ConfirmedAttendeesComponent,
-  ],
+    ConfirmedAttendeesComponent
+],
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {

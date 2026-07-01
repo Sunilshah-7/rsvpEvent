@@ -1,12 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+
 import { RsvpCounts } from '../../models/rsvp.models';
 
 @Component({
   selector: 'app-rsvp-stats',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './rsvp-stats.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./rsvp-stats.component.scss'],
 })
 export class RsvpStatsComponent {
